@@ -82,6 +82,7 @@ public class Login {
                 HttpSession s = (HttpSession) ec.getSession(true);
                 s.setAttribute("usuario", bs);
                 return "/index.xhtml";
+                
             }
         }
          
