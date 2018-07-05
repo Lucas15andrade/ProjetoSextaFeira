@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <body>
+
+        <ui:composition>
+
+            <nav class="navbar navbar-default" role="navigation">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand " href="#">
+                        <h:graphicImage style="width: 100px" library="images" name="logotads.png"/>
+                    </a>
+
+
+                </div>
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="/ProjetoSextaFeira/index.xhtml">Início</a></li>
+                        <li class=""><a href="/ProjetoSextaFeira/publico/login.xhtml">Login</a></li>
+                        
+                        <li> </li>
+
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projetos <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Listar</a></li>
+                                <li><a href="">Cadastrar</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edital <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/ProjetoSextaFeira/publico/listarEdital.xhtml">Listar</a></li>
+                                <li><a href="/ProjetoSextaFeira/user/cadastroEdital.xhtml">Cadastrar</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    
+
+                </div>
+
+            </nav>
+
+        </ui:composition>
+
+    </body>
+</html>
+

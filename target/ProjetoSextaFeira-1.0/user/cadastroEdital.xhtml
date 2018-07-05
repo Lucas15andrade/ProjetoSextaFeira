@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/common.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form>
+                    <p style="font-family: arial; font-size: 14px"><p:outputLabel value="Título "/> <p:inputText value="#{cadastroEditalControlador.edital.titulo}" required="true"/>
+                    </p>
+                    <p style="font-family: arial; font-size: 14px"><p:outputLabel value="Data de início "/> <p:calendar value="#{cadastroEditalControlador.edital.dataInicio}"/>
+                    </p>
+                    <p style="font-family: arial; font-size: 14px"><p:outputLabel value="Data de término "/> <p:calendar value="#{cadastroEditalControlador.edital.dataFim}"/>
+                    </p>
+                    <p style="font-family: arial; font-size: 14px"><p:outputLabel value="Descrição "/> <p:inputTextarea value="#{cadastroEditalControlador.edital.descricao}"/>
+                    </p>
+                    <p:commandButton style="font-size: 14px" id="withIcon" value="Salvar"  actionListener="#{cadastroEditalControlador.salvar()}" icon="ui-icon-disk"/>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
+
