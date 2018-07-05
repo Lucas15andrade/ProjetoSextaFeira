@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import model.Autenticacao;
 import model.Bolsista;
 import model.Professor;
@@ -114,30 +117,23 @@ public class BolsistaControlador {
 
     public void salvar() {
 
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        HttpSession s = (HttpSession) ec.getSession(false);
+
+        Professor user = (Professor) s.getAttribute("usuario");
+        
         IBolsistaDao bd = new BolsistaDaoImp();
         IAutenticacaoDao ad = new AutenticacaoDaoImp();
         
         IProfessorDao pd = new ProfessorDaoImp();
-
         
-        //Trecho de código que deveria buscar no banco todos os professores e selecionar o que foi determinado.
-        /*
-        listaProfessores = pd.findAll();
-
-        if (listaProfessores != null) {
-            for (int x = 0; x < listaProfessores.size(); x++) {
-                //System.out.println("Teste: "+lp.getNome());
-                if (listaProfessores.get(x).getNome().equals(professorResponsavel)) {
-                    System.out.println("Teste: " + listaProfessores.get(x).getNome());
-                }
-            }
-        }
-         */
-        
-        autenticacao.setBolsista(bolsista);
         autenticacao.setLogin(login);
         autenticacao.setSenha(senha);
-        autenticacao.setProfessor(null);
+        autenticacao.setBolsista(bolsista);
+        //autenticacao.setProfessor((Professor) s.getAttribute("usuario"));
+        
+        bolsista.setProfessor((Professor) s.getAttribute("usuario"));
         ad.save(autenticacao);
         bd.save(bolsista);
         

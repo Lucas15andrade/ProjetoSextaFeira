@@ -27,6 +27,7 @@ public class ConectaHibernateMySQL {
                 
 		System.out.println("Conectou!");
 		sessao.close();
+                System.exit(0);
 	}
     
 }

@@ -72,16 +72,9 @@ public class CadastroEditalControlador {
         ExternalContext ec = fc.getExternalContext();
         HttpSession s = (HttpSession) ec.getSession(false);
 
-        Autenticacao user = (Autenticacao) s.getAttribute("usuario");
+        Professor user = (Professor) s.getAttribute("usuario");
 
-        if (user.getProfessor() != null) {
-            edital.setProfessor(user.getProfessor());
-            //edital.
-            System.out.println("É um professor Edital");
-        } else {
-            System.out.println("Não é um professor");
-            return;
-        }
+        edital.setProfessor(user);
 
         //IEditalDao ed = new EditalDaoImp();
         ed.save(edital);

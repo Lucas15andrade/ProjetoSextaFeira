@@ -37,14 +37,10 @@ public class Autenticacao {
     @Column(name = "usuario_senha")
     String senha;
 
-    @OneToOne
-    @Cascade({CascadeType.ALL})
-    @JoinColumn(name = "id_professor")
+    @OneToOne(mappedBy = "autenticacao")
     Professor professor;
 
-    @OneToOne
-    @Cascade({CascadeType.ALL})
-    @JoinColumn(name = "id_bolsista")
+    @OneToOne(mappedBy = "autenticacao")
     Bolsista bolsista;
 
     public Autenticacao() {

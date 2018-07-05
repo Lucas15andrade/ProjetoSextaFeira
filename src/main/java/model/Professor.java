@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -28,9 +29,8 @@ import org.hibernate.annotations.CascadeType;
  */
 @Entity
 @Table(name = "professor")
-public class Professor implements Serializable{
+public class Professor implements Serializable {
 
-    
     //Anteiormente estava identity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,20 +53,34 @@ public class Professor implements Serializable{
     String areaFormacao;
 
     @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY, orphanRemoval = true)
-    //@Cascade({CascadeType.ALL})
+    //@Cascade(CascadeType.ALL)
     List<Bolsista> bolsista = new ArrayList<>();
+
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY, orphanRemoval = true)
+    //@Cascade(CascadeType.ALL)
+    List<Edital> edital = new ArrayList<>();
+
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY, orphanRemoval = true)
+    //@Cascade(CascadeType.ALL)
+    List<Projeto> projeto = new ArrayList<>();
+    
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    @JoinColumn(name = "autenticacao_id")
+    Autenticacao autenticacao;
 
     public Professor() {
 
     }
 
-    public Professor(Integer id, String nome, String telefone, String email, String departamento, String areaFormacao) {
+    public Professor(Integer id, String nome, String telefone, String email, String departamento, String areaFormacao, Autenticacao autenticacao) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.departamento = departamento;
         this.areaFormacao = areaFormacao;
+        this.autenticacao = autenticacao;
     }
 
     public Integer getId() {
@@ -117,12 +131,36 @@ public class Professor implements Serializable{
         this.areaFormacao = areaFormacao;
     }
 
-    public List<Bolsista> getBolsistas() {
+    public List<Bolsista> getBolsista() {
         return bolsista;
     }
 
-    public void setBolsistas(List<Bolsista> bolsista) {
+    public void setBolsista(List<Bolsista> bolsista) {
         this.bolsista = bolsista;
+    }
+
+    public List<Edital> getEdital() {
+        return edital;
+    }
+
+    public void setEdital(List<Edital> edital) {
+        this.edital = edital;
+    }
+
+    public List<Projeto> getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(List<Projeto> projeto) {
+        this.projeto = projeto;
+    }
+
+    public Autenticacao getAutenticacao() {
+        return autenticacao;
+    }
+
+    public void setAutenticacao(Autenticacao autenticacao) {
+        this.autenticacao = autenticacao;
     }
 
     @Override
@@ -135,6 +173,9 @@ public class Professor implements Serializable{
         hash = 59 * hash + Objects.hashCode(this.departamento);
         hash = 59 * hash + Objects.hashCode(this.areaFormacao);
         hash = 59 * hash + Objects.hashCode(this.bolsista);
+        hash = 59 * hash + Objects.hashCode(this.edital);
+        hash = 59 * hash + Objects.hashCode(this.projeto);
+        hash = 59 * hash + Objects.hashCode(this.autenticacao);
         return hash;
     }
 
@@ -171,7 +212,18 @@ public class Professor implements Serializable{
         if (!Objects.equals(this.bolsista, other.bolsista)) {
             return false;
         }
+        if (!Objects.equals(this.edital, other.edital)) {
+            return false;
+        }
+        if (!Objects.equals(this.projeto, other.projeto)) {
+            return false;
+        }
+        if (!Objects.equals(this.autenticacao, other.autenticacao)) {
+            return false;
+        }
         return true;
     }
+
+   
 
 }

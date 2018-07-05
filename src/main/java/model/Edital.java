@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
@@ -26,7 +28,7 @@ import org.hibernate.annotations.CascadeType;
 //Mapeamento realizado com sucesso
 @Entity
 @Table(name = "edital")
-public class Edital {
+public class Edital implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,9 +47,9 @@ public class Edital {
     @Column(name = "descricao")
     String descricao;
     
-    @OneToOne
+    @ManyToOne
     //@Cascade({CascadeType.ALL})
-    @JoinColumn(name = "id_professor")
+    @JoinColumn(name = "professor_id")
     Professor professor;
 
     public Edital() {

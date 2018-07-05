@@ -114,22 +114,17 @@ public class ProfessorControlador {
 
     public void salvar() {
         
+        IProfessorDao pd = new ProfessorDaoImp();    
         IAutenticacaoDao ad = new AutenticacaoDaoImp();
         
         autenticacao.setLogin(login);
         autenticacao.setSenha(senha);
-        autenticacao.setBolsista(null);
         autenticacao.setProfessor(professor);
-        
+        professor.setAutenticacao(autenticacao);
         ad.save(autenticacao);
-        
-        IProfessorDao pd = new ProfessorDaoImp();
-        professor.setBolsistas(null);
         pd.save(professor);
         
         professor = new Professor();
         autenticacao = new Autenticacao();
-        
-        
     }
 }

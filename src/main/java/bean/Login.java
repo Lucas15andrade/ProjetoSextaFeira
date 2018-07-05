@@ -6,7 +6,11 @@
 package bean;
 
 import dao.AutenticacaoDaoImp;
+import dao.BolsistaDaoImp;
+import dao.ProfessorDaoImp;
 import interfaces.IAutenticacaoDao;
+import interfaces.IBolsistaDao;
+import interfaces.IProfessorDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,47 +37,68 @@ public class Login {
     Bolsista bolsista;
     String login;
     String senha;
-    List<Autenticacao> listaUsuarios;
+    List<Professor> listaProfessor;
+    List<Bolsista> listaBolsista;
+    List<Autenticacao> listaAutenticacao;
     Autenticacao autenticacao;
 
     public Login() {
         login = new String();
         senha = new String();
-        listaUsuarios = new ArrayList<>();
+        listaProfessor = new ArrayList<>();
+        listaBolsista = new ArrayList<>();
+        listaAutenticacao = new ArrayList<>();
         autenticacao = new Autenticacao();
     }
 
     public String logar() {
         IAutenticacaoDao ad = new AutenticacaoDaoImp();
-        listaUsuarios = ad.findAll();
+        IProfessorDao pd = new ProfessorDaoImp();
+        IBolsistaDao bd = new BolsistaDaoImp();
+
+        listaProfessor = pd.findAll();
+        listaBolsista = bd.findAll();
         //System.out.println("Entrou no método de logar!");
 
         FacesContext fc = FacesContext.getCurrentInstance();
         ExternalContext ec = fc.getExternalContext();
         //HttpSession s = (HttpSession) ec.getSession(true);
 
-        for (Autenticacao lu : listaUsuarios) {
-            if (lu.getLogin().equals(login) && lu.getSenha().equals(senha)) {
-                if (lu.getBolsista() != null) {
-                    System.out.println("É um bolsista");
-                    HttpSession s = (HttpSession) ec.getSession(true);
-                    s.setAttribute("usuario", lu);
-                    return "/index.xhtml";
-
-                } else if (lu.getProfessor() != null) {
-                    System.out.println("É um professor");
-                    HttpSession s = (HttpSession) ec.getSession(true);
-                    s.setAttribute("usuario", lu);
-                    return "/index.xhtml";
-
-                } else {
-                    System.out.println("Não encontrado");
-                    return "/publico/login.xhtml";
-                }
+        
+        for (Professor pf : listaProfessor) {
+            System.out.println("l1");
+            if(pf.getAutenticacao().getLogin().equals(login) && pf.getAutenticacao().getSenha().equals(senha)){
+                System.out.println("Login e senha de professor estão corretos!");
+                HttpSession s = (HttpSession) ec.getSession(true);
+                s.setAttribute("usuario", pf);
+                return "/index.xhtml";
             }
         }
+        
+        for (Bolsista bs : listaBolsista) {
+            System.out.println("l1");
+            if(bs.getAutenticacao().getLogin().equals(login) && bs.getAutenticacao().getSenha().equals(senha)){
+                System.out.println("Login e senha de bolsista estão corretos!");
+                HttpSession s = (HttpSession) ec.getSession(true);
+                s.setAttribute("usuario", bs);
+                return "/index.xhtml";
+            }
+        }
+         
+        
+        
+        return "../publico/login";
+    }
 
-        return "index";
+    public Login(Professor professor, Bolsista bolsista, String login, String senha, List<Professor> listaProfessor, List<Bolsista> listaBolsista, List<Autenticacao> listaAutenticacao, Autenticacao autenticacao) {
+        this.professor = professor;
+        this.bolsista = bolsista;
+        this.login = login;
+        this.senha = senha;
+        this.listaProfessor = listaProfessor;
+        this.listaBolsista = listaBolsista;
+        this.listaAutenticacao = listaAutenticacao;
+        this.autenticacao = autenticacao;
     }
 
     public Professor getProfessor() {
@@ -97,7 +122,6 @@ public class Login {
     }
 
     public void setLogin(String login) {
-        //System.out.println("setou login");
         this.login = login;
     }
 
@@ -109,12 +133,28 @@ public class Login {
         this.senha = senha;
     }
 
-    public List<Autenticacao> getListaUsuarios() {
-        return listaUsuarios;
+    public List<Professor> getListaProfessor() {
+        return listaProfessor;
     }
 
-    public void setListaUsuarios(List<Autenticacao> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
+    public void setListaProfessor(List<Professor> listaProfessor) {
+        this.listaProfessor = listaProfessor;
+    }
+
+    public List<Bolsista> getListaBolsista() {
+        return listaBolsista;
+    }
+
+    public void setListaBolsista(List<Bolsista> listaBolsista) {
+        this.listaBolsista = listaBolsista;
+    }
+
+    public List<Autenticacao> getListaAutenticacao() {
+        return listaAutenticacao;
+    }
+
+    public void setListaAutenticacao(List<Autenticacao> listaAutenticacao) {
+        this.listaAutenticacao = listaAutenticacao;
     }
 
     public Autenticacao getAutenticacao() {
@@ -128,12 +168,14 @@ public class Login {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + Objects.hashCode(this.professor);
-        hash = 31 * hash + Objects.hashCode(this.bolsista);
-        hash = 31 * hash + Objects.hashCode(this.login);
-        hash = 31 * hash + Objects.hashCode(this.senha);
-        hash = 31 * hash + Objects.hashCode(this.listaUsuarios);
-        hash = 31 * hash + Objects.hashCode(this.autenticacao);
+        hash = 13 * hash + Objects.hashCode(this.professor);
+        hash = 13 * hash + Objects.hashCode(this.bolsista);
+        hash = 13 * hash + Objects.hashCode(this.login);
+        hash = 13 * hash + Objects.hashCode(this.senha);
+        hash = 13 * hash + Objects.hashCode(this.listaProfessor);
+        hash = 13 * hash + Objects.hashCode(this.listaBolsista);
+        hash = 13 * hash + Objects.hashCode(this.listaAutenticacao);
+        hash = 13 * hash + Objects.hashCode(this.autenticacao);
         return hash;
     }
 
@@ -161,7 +203,13 @@ public class Login {
         if (!Objects.equals(this.bolsista, other.bolsista)) {
             return false;
         }
-        if (!Objects.equals(this.listaUsuarios, other.listaUsuarios)) {
+        if (!Objects.equals(this.listaProfessor, other.listaProfessor)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaBolsista, other.listaBolsista)) {
+            return false;
+        }
+        if (!Objects.equals(this.listaAutenticacao, other.listaAutenticacao)) {
             return false;
         }
         if (!Objects.equals(this.autenticacao, other.autenticacao)) {
@@ -169,5 +217,7 @@ public class Login {
         }
         return true;
     }
+    
+    
 
 }
