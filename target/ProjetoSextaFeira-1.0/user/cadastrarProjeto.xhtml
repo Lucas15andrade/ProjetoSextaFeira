@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/common.xhtml">
+        <ui:define name="content">
+            <h:body>
+                <h:form class="form-horizontal">
+
+                    <div class="well well-sm">
+
+                        <fieldset>
+                            <legend class="text-center header">Cadastro de projeto</legend>
+
+                            <div class="form-group">
+                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                <div class="col-md-8">
+                                    <label>Nome: </label>
+                                    <p style="font-family: arial; font-size: 14px"> <p:inputText value="#{projetoControlador.projeto.nome}" required="true"/>
+                                    </p></div>
+                            </div>
+                            <div class="form-group">
+                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                <div class="col-md-8">
+                                    <label>Data de início: </label>
+                                    <p style="font-family: arial; font-size: 14px"><p:calendar value="#{projetoControlador.projeto.dataInicio}"/>
+                                    </p></div>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                                <div class="col-md-8">
+                                    <label>Data de término: </label>
+                                    <p style="font-family: arial; font-size: 14px"> <p:calendar value="#{projetoControlador.projeto.dataFim}"/>
+                                    </p></div>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                <div class="col-md-8">
+                                    <label>Descrição: </label>
+                                    <p style="font-family: arial; font-size: 14px"> <p:inputTextarea value="#{projetoControlador.projeto.descricao}"/>
+                                    </p> </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 text-center">
+                                    <p:commandButton style="font-size: 14px" id="withIcon" value="Salvar" actionListener="#{projetoControlador.salvarProfesor()}" icon="ui-icon-disk"/>
+
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                    <!--
+                           </div>
+                       </div>
+                   </div>-->
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
+

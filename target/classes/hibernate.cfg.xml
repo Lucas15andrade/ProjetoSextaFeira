@@ -62,5 +62,6 @@ Contributor(s):
         <mapping class="model.Bolsista"/>
         <mapping class="model.Edital"/>
         <mapping class="model.Projeto"/>
+        <mapping class="model.Inscricao"/>
     </session-factory>
 </hibernate-configuration>

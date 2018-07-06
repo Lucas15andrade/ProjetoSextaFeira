@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template = "../templates/common.xhtml"> 
+        <ui:define name="content">
+
+            <h:form style="height: 800px">
+                <div id="#tamanho">
+                    <p:dataScroller value="#{projetoControlador.listaProjeto}" var="projeto" chunkSize="10">
+                        <f:facet name="header">
+                            Desça para ver todos os projetos
+                        </f:facet>
+
+                        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                            <!--<p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />--> 
+
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Nome: " />
+                                    <h:outputText value="#{projeto.nome}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Descrição: " />
+                                    <h:outputText value="#{projeto.descricao}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Data de início: " />
+                                    <h:outputText value="#{projeto.dataInicio}" style="font-weight: bold"/>
+
+                                    <h:outputText value="Data de término " />
+                                    <h:outputText value="#{projeto.dataFim}" style="font-weight: bold"/>
+
+
+                                </h:panelGrid>
+                                <hr/>
+
+                            </p:outputPanel>
+                        </h:panelGrid>
+                    </p:dataScroller>
+                </div>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

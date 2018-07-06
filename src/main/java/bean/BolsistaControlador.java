@@ -122,21 +122,22 @@ public class BolsistaControlador {
         HttpSession s = (HttpSession) ec.getSession(false);
 
         Professor user = (Professor) s.getAttribute("usuario");
-        
+
         IBolsistaDao bd = new BolsistaDaoImp();
         IAutenticacaoDao ad = new AutenticacaoDaoImp();
-        
+
         IProfessorDao pd = new ProfessorDaoImp();
-        
+
         autenticacao.setLogin(login);
         autenticacao.setSenha(senha);
         autenticacao.setBolsista(bolsista);
         //autenticacao.setProfessor((Professor) s.getAttribute("usuario"));
-        
+
         bolsista.setProfessor((Professor) s.getAttribute("usuario"));
+        bolsista.setAutenticacao(autenticacao);
         ad.save(autenticacao);
         bd.save(bolsista);
-        
+
         autenticacao = new Autenticacao();
         bolsista = new Bolsista();
     }
@@ -148,4 +149,12 @@ public class BolsistaControlador {
         return listaProfessores;
     }
 
+    public String deslogar() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        HttpSession s = (HttpSession) ec.getSession(false);
+        s.invalidate();
+
+        return "/index.xhtml";
+    }
 }

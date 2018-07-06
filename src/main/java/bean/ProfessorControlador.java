@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Objects;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import model.Autenticacao;
 import model.Professor;
 
@@ -126,5 +129,14 @@ public class ProfessorControlador {
         
         professor = new Professor();
         autenticacao = new Autenticacao();
+    }
+    
+    public String deslogar(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        HttpSession s = (HttpSession) ec.getSession(false);
+        s.invalidate();
+        
+        return "/index.xhtml";
     }
 }

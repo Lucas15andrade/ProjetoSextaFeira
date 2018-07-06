@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.CascadeType;
  */
 @Entity
 @Table(name = "autenticacao")
-public class Autenticacao {
+public class Autenticacao implements Serializable{
 
     @Id
     @GeneratedValue

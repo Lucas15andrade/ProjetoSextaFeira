@@ -49,9 +49,10 @@ public class Login {
         listaBolsista = new ArrayList<>();
         listaAutenticacao = new ArrayList<>();
         autenticacao = new Autenticacao();
+        bolsista = new Bolsista();
     }
 
-    public String logar() {
+    public void logar() {
         IAutenticacaoDao ad = new AutenticacaoDaoImp();
         IProfessorDao pd = new ProfessorDaoImp();
         IBolsistaDao bd = new BolsistaDaoImp();
@@ -71,24 +72,24 @@ public class Login {
                 System.out.println("Login e senha de professor estão corretos!");
                 HttpSession s = (HttpSession) ec.getSession(true);
                 s.setAttribute("usuario", pf);
-                return "/index.xhtml";
+                return;
             }
         }
         
         for (Bolsista bs : listaBolsista) {
-            System.out.println("l1");
+            System.out.println("vrau");
             if(bs.getAutenticacao().getLogin().equals(login) && bs.getAutenticacao().getSenha().equals(senha)){
                 System.out.println("Login e senha de bolsista estão corretos!");
                 HttpSession s = (HttpSession) ec.getSession(true);
                 s.setAttribute("usuario", bs);
-                return "/index.xhtml";
+                return;
                 
             }
         }
          
         
         
-        return "../publico/login";
+        //return "../publico/login";
     }
 
     public Login(Professor professor, Bolsista bolsista, String login, String senha, List<Professor> listaProfessor, List<Bolsista> listaBolsista, List<Autenticacao> listaAutenticacao, Autenticacao autenticacao) {

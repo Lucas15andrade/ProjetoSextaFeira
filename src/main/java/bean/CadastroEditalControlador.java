@@ -7,6 +7,7 @@ package bean;
 
 import dao.EditalDaoImp;
 import interfaces.IEditalDao;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,10 +44,6 @@ public class CadastroEditalControlador {
         return editais;
     }
 
-    public List<Edital> listarEdital() {
-
-        return editais;
-    }
 
     public void setEditais(List<Edital> editais) {
         this.editais = editais;
@@ -82,4 +79,21 @@ public class CadastroEditalControlador {
 
     }
 
+    public void deletar(Edital edital){
+        IEditalDao ed = new EditalDaoImp();
+        ed.delete(edital);
+    }
+    
+    public void editar(Edital edital){
+        
+    }
+    
+    public void cancelar() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        } catch (IOException ex) {
+            //Logger.getLogger(Locadora.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro");
+        }
+    }
 }

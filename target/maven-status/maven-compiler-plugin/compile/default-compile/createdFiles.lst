@@ -4,6 +4,7 @@ dao\GenericDaoImpl$1.class
 model\Professor.class
 bean\BolsistaControlador.class
 bean\ProfessorControlador.class
+bean\GaleriaControlador.class
 dao\BolsistaDaoImp.class
 util\TestesHibernate.class
 interfaces\IProfessorDao.class
@@ -12,6 +13,7 @@ dao\GenericDaoImpl$2.class
 interfaces\IAutenticacaoDao.class
 dao\EditalDaoImp.class
 dao\AutenticacaoDaoImp.class
+dao\ProjetoDaoImp.class
 bean\CadastroEditalControlador.class
 dao\GenericDaoImpl.class
 util\ConectaHibernateMySQL.class
@@ -22,3 +24,6 @@ util\HibernateUtil.class
 model\Autenticacao.class
 model\Bolsista.class
 dao\ProfessorDaoImp.class
+bean\ProjetoControlador.class
+interfaces\IProjetoDao.class
+model\Inscricao.class
